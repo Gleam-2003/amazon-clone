@@ -1,0 +1,422 @@
+.product-listing {
+  min-height: calc(100vh - 60px);
+  padding: 0;
+  background-color: #EAEDED;
+}
+
+/* Promotional Banner Styles */
+.promotional-banner-container {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #EAEDED;
+  padding: 10px 0;
+}
+
+.promotional-banner {
+  position: relative;
+  max-width: 1500px;
+  margin: 0 auto;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.promotional-banner:hover {
+  transform: scale(1.01);
+}
+
+.banner-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  position: relative;
+}
+
+.banner-left {
+  flex: 0 0 50%;
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+  background: linear-gradient(to right, transparent 0%, transparent 95%, rgba(0,0,0,0.05) 100%);
+}
+
+.banner-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.banner-price {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.banner-offer-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.amazon-pay-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.amazon-pay-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+.banner-offer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.offer-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.3;
+}
+
+.offer-subtext {
+  font-size: 14px;
+  color: #000;
+  opacity: 0.8;
+  line-height: 1.3;
+}
+
+.banner-tnc {
+  font-size: 12px;
+  color: #000;
+  opacity: 0.7;
+  margin-top: 10px;
+}
+
+.credit-card-visual {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 120px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-top: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  color: white;
+  font-family: 'Courier New', monospace;
+}
+
+.card-chip {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.card-number {
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.card-holder {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.card-brand {
+  position: absolute;
+  bottom: 12px;
+  right: 15px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFA500;
+}
+
+.banner-right {
+  flex: 0 0 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.banner-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 32px;
+  color: #000;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.banner-nav-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.banner-nav-left {
+  left: 15px;
+}
+
+.banner-nav-right {
+  right: 15px;
+}
+
+.banner-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.banner-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.banner-indicator.active {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 1);
+  width: 30px;
+  border-radius: 5px;
+}
+
+.banner-indicator:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 1024px) {
+  .promotional-banner {
+    height: 300px;
+  }
+
+  .banner-left {
+    padding: 30px 40px;
+  }
+
+  .banner-title {
+    font-size: 24px;
+  }
+
+  .banner-price {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .promotional-banner {
+    height: 250px;
+  }
+
+  .banner-left {
+    padding: 20px 30px;
+    flex: 0 0 60%;
+  }
+
+  .banner-right {
+    flex: 0 0 40%;
+  }
+
+  .banner-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .banner-price {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .offer-text {
+    font-size: 14px;
+  }
+
+  .offer-subtext {
+    font-size: 12px;
+  }
+
+  .banner-nav-button {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .banner-nav-left {
+    left: 10px;
+  }
+
+  .banner-nav-right {
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promotional-banner {
+    height: 200px;
+  }
+
+  .banner-left {
+    padding: 15px 20px;
+  }
+
+  .banner-title {
+    font-size: 16px;
+  }
+
+  .banner-price {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .banner-offer-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .offer-text,
+  .offer-subtext {
+    font-size: 11px;
+  }
+
+  .banner-tnc {
+    font-size: 10px;
+  }
+}
+
+.listing-container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.products-section {
+  width: 100%;
+}
+
+.search-results-header {
+  background-color: white;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-results-header h2 {
+  font-size: 20px;
+  color: #0f1111;
+  margin-bottom: 8px;
+}
+
+.filter-badge {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #666;
+}
+
+.results-count {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.loading,
+.no-products {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-products p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.clear-filters-btn {
+  background-color: #ff9900;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.clear-filters-btn:hover {
+  background-color: #e68900;
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+}
+
