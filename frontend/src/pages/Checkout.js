@@ -20,10 +20,6 @@ const Checkout = () => {
     phone: '',
   });
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
-
   const fetchCart = async () => {
     try {
       const response = await getCart();
@@ -37,6 +33,11 @@ const Checkout = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

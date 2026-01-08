@@ -37,17 +37,6 @@ const OrderHistory = () => {
     });
   };
 
-  const getStatusColor = (status) => {
-    const statusColors = {
-      pending: '#ff9900',
-      confirmed: '#007600',
-      processing: '#0066cc',
-      shipped: '#0066cc',
-      delivered: '#008000',
-      cancelled: '#cc0000'
-    };
-    return statusColors[status?.toLowerCase()] || '#666';
-  };
 
   if (loading) {
     return (

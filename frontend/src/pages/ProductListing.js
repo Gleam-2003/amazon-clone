@@ -27,12 +27,6 @@ const ProductListing = () => {
     window.scrollTo(0, 0);
   }, [searchParams]);
 
-  useEffect(() => {
-    if (categories.length > 0 || !selectedCategory) {
-      fetchProducts();
-    }
-  }, [selectedCategory, searchQuery, categories.length]);
-
   const fetchCategories = async () => {
     try {
       const response = await getCategories();
@@ -54,13 +48,12 @@ const ProductListing = () => {
     }
   };
 
-  const handleCategoryChange = (categoryId) => {
-    setSelectedCategory(categoryId);
-    setSearchParams({ 
-      ...(categoryId && { category: categoryId }),
-      ...(searchQuery && { search: searchQuery })
-    });
-  };
+  useEffect(() => {
+    if (categories.length > 0 || !selectedCategory) {
+      fetchProducts();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, searchQuery, categories.length]);
 
   const clearFilters = () => {
     setSelectedCategory('');
@@ -118,6 +111,7 @@ const ProductListing = () => {
       // Reset to first banner when filters are applied
       setBannerIndex(0);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory, searchQuery]);
 
   const currentBanner = promotionalBanners[bannerIndex];
@@ -188,11 +182,11 @@ const ProductListing = () => {
             <div className="search-results-header">
               {searchQuery && <h2>Search Results for "{searchQuery}"</h2>}
               {selectedCategory && !searchQuery && (
-                <h2>{categories.find(c => c.id == selectedCategory)?.name || 'Products'}</h2>
+                <h2>{categories.find(c => c.id === selectedCategory)?.name || 'Products'}</h2>
               )}
               {selectedCategory && (
                 <span className="filter-badge">
-                  Category: {categories.find(c => c.id == selectedCategory)?.name}
+                  Category: {categories.find(c => c.id === selectedCategory)?.name}
                 </span>
               )}
             </div>

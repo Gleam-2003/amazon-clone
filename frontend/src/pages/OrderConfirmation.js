@@ -10,10 +10,6 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchOrder();
-  }, [orderId]);
-
   const fetchOrder = async () => {
     try {
       const response = await getOrderById(orderId);
@@ -24,6 +20,11 @@ const OrderConfirmation = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderId]);
 
   if (loading) {
     return <div className="confirmation-loading">Loading order details...</div>;
