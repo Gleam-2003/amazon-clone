@@ -9,24 +9,26 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 // CORS configuration - allow frontend URL from environment or default to allow all in development
-const allowedOrigins = process.env.FRONTEND_URL 
-  ? [process.env.FRONTEND_URL, 'http://localhost:3000']
-  : ['http://localhost:3000'];
+// const allowedOrigins = process.env.FRONTEND_URL 
+//   ? [process.env.FRONTEND_URL, 'http://localhost:3000']
+//   : ['http://localhost:3000'];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     // Allow requests with no origin (like mobile apps or curl requests)
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: '*',
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
