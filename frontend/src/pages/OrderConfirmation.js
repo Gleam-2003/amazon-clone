@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getOrderById } from '../api/api';
 import { parseImageUrls } from '../utils/parseJson';
@@ -10,7 +10,7 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     try {
       const response = await getOrderById(orderId);
       setOrder(response.data);
@@ -19,11 +19,11 @@ const OrderConfirmation = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [orderId]);
 
   useEffect(() => {
     fetchOrder();
-  }, [orderId]);
+  }, [fetchOrder]);
 
   if (loading) {
     return <div className="confirmation-loading">Loading order details...</div>;

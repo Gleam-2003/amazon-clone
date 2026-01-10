@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCart, createOrder } from '../api/api';
 import { parseImageUrls } from '../utils/parseJson';
@@ -20,7 +20,7 @@ const Checkout = () => {
     phone: '',
   });
 
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
     try {
       const response = await getCart();
       setCartItems(response.data);
@@ -32,11 +32,11 @@ const Checkout = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
 
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, [fetchCart]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

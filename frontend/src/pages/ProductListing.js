@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { getProducts, getCategories } from '../api/api';
@@ -34,7 +34,7 @@ const ProductListing = () => {
     }
   };
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       const response = await getProducts(searchQuery, selectedCategory);
@@ -44,13 +44,13 @@ const ProductListing = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchQuery, selectedCategory]);
 
   useEffect(() => {
     if (categories.length > 0 || !selectedCategory) {
       fetchProducts();
     }
-  }, [selectedCategory, searchQuery, categories.length]);
+  }, [selectedCategory, searchQuery, categories.length, fetchProducts]);
 
   const clearFilters = () => {
     setSelectedCategory('');
@@ -105,7 +105,7 @@ const ProductListing = () => {
     } else {
       setBannerIndex(0);
     }
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, promotionalBanners.length]);
 
   const currentBanner = promotionalBanners[bannerIndex];
 
