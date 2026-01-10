@@ -4,7 +4,6 @@ const db = require('../config/db');
 
 const DEFAULT_USER_ID = 1;
 
-// Get all returns for default user
 router.get('/', (req, res) => {
   const query = `
     SELECT r.*, 
@@ -36,7 +35,6 @@ router.get('/', (req, res) => {
   });
 });
 
-// Get single return by ID
 router.get('/:id', (req, res) => {
   const returnId = req.params.id;
   
@@ -73,7 +71,6 @@ router.get('/:id', (req, res) => {
   });
 });
 
-// Create new return request
 router.post('/', (req, res) => {
   const { order_id, order_item_id, return_reason, return_quantity, return_description } = req.body;
 
@@ -86,7 +83,6 @@ router.post('/', (req, res) => {
     });
   }
 
-  // Verify order belongs to user
   const verifyOrderQuery = 'SELECT id FROM orders WHERE id = ? AND user_id = ?';
   
   db.query(verifyOrderQuery, [order_id, DEFAULT_USER_ID], (err, orderResults) => {
@@ -99,7 +95,6 @@ router.post('/', (req, res) => {
       return res.status(404).json({ error: 'Order not found' });
     }
 
-    // Get order item details
     const itemQuery = 'SELECT quantity, price FROM order_items WHERE id = ? AND order_id = ?';
     
     db.query(itemQuery, [order_item_id, order_id], (err, itemResults) => {
@@ -114,15 +109,12 @@ router.post('/', (req, res) => {
 
       const orderItem = itemResults[0];
       
-      // Validate return quantity
       if (return_quantity > orderItem.quantity) {
         return res.status(400).json({ error: 'Return quantity cannot exceed ordered quantity' });
       }
 
-      // Calculate refund amount
       const refundAmount = (orderItem.price * return_quantity).toFixed(2);
 
-      // Create return request
       const insertQuery = `
         INSERT INTO returns (order_id, order_item_id, return_reason, return_quantity, refund_amount, return_description, return_status)
         VALUES (?, ?, ?, ?, ?, ?, 'pending')
@@ -150,7 +142,6 @@ router.post('/', (req, res) => {
   });
 });
 
-// Update return status (for admin use - can be extended later)
 router.patch('/:id/status', (req, res) => {
   const returnId = req.params.id;
   const { status } = req.body;

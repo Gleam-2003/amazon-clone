@@ -11,16 +11,12 @@ const Footer = () => {
 
   return (
     <footer className="amazon-footer">
-      {/* Back to top button */}
       <div className="footer-back-to-top" onClick={scrollToTop}>
         Back to top
       </div>
 
-      {/* Main footer content */}
       <div className="footer-content">
-        {/* Four main columns */}
         <div className="footer-columns">
-          {/* Get to Know Us */}
           <div className="footer-column">
             <h3>Get to Know Us</h3>
             <ul>
@@ -31,7 +27,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Connect with Us */}
           <div className="footer-column">
             <h3>Connect with Us</h3>
             <ul>
@@ -41,7 +36,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Make Money with Us */}
           <div className="footer-column">
             <h3>Make Money with Us</h3>
             <ul>
@@ -57,7 +51,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Let Us Help You */}
           <div className="footer-column">
             <h3>Let Us Help You</h3>
             <ul>
@@ -71,7 +64,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Amazon Logo and Language/Country Selectors */}
         <div className="footer-logo-section">
           <div className="footer-logo">
             <span className="amazon-logo-text">amazon.in</span>
@@ -90,7 +82,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Amazon Affiliated Services */}
         <div className="footer-services">
           <div className="footer-service">
             <div className="service-title">AbeBooks</div>
@@ -123,7 +114,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="footer-bottom-links">
           <a href="#conditions">Conditions of Use & Sale</a>

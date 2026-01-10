@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-// Get all products with optional search and category filter
 router.get('/', (req, res) => {
   const { search, category } = req.query;
   let query = `
@@ -34,7 +33,6 @@ router.get('/', (req, res) => {
   });
 });
 
-// Get single product by ID
 router.get('/:id', (req, res) => {
   const productId = req.params.id;
   

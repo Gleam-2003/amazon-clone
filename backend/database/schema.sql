@@ -1,7 +1,3 @@
--- Amazon Clone Database Schema
--- Contains table definitions only (no seed data)
--- Safe to re-run multiple times
-
 CREATE DATABASE IF NOT EXISTS amazon_clone;
 USE amazon_clone;
 

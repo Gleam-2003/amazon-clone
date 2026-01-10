@@ -37,7 +37,6 @@ const OrderHistory = () => {
     });
   };
 
-
   if (loading) {
     return (
       <div className="order-history">

@@ -17,13 +17,11 @@ const ProductListing = () => {
     fetchCategories();
   }, []);
 
-  // Update state when URL params change
   useEffect(() => {
     const category = searchParams.get('category') || '';
     const search = searchParams.get('search') || '';
     setSelectedCategory(category);
     setSearchQuery(search);
-    // Scroll to top when category changes
     window.scrollTo(0, 0);
   }, [searchParams]);
 
@@ -61,7 +59,6 @@ const ProductListing = () => {
     setSearchParams({});
   };
 
-  // Promotional banners data
   const promotionalBanners = [
     {
       id: 1,
@@ -100,7 +97,6 @@ const ProductListing = () => {
     setBannerIndex((prev) => (prev === promotionalBanners.length - 1 ? 0 : prev + 1));
   };
 
-  // Auto-rotate banners every 5 seconds (only on homepage)
   useEffect(() => {
     if (!selectedCategory && !searchQuery) {
       const interval = setInterval(() => {
@@ -108,7 +104,6 @@ const ProductListing = () => {
       }, 5000);
       return () => clearInterval(interval);
     } else {
-      // Reset to first banner when filters are applied
       setBannerIndex(0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,7 +113,6 @@ const ProductListing = () => {
 
   return (
     <div className="product-listing">
-      {/* Promotional Banner - Only show on homepage (no category/search filter) */}
       {!selectedCategory && !searchQuery && (
         <div className="promotional-banner-container">
           <div className="promotional-banner" style={{ backgroundColor: currentBanner.backgroundColor }}>
@@ -139,9 +133,8 @@ const ProductListing = () => {
                     <div className="offer-text">{currentBanner.offer}</div>
                     <div className="offer-subtext">{currentBanner.offerSubtext}</div>
                   </div>
-                </div>
+                  </div>
                 
-                {/* Credit Card Visual */}
                 <div className="credit-card-visual">
                   <div className="card-chip">⚫</div>
                   <div className="card-number">**** **** **** 1234</div>
@@ -159,9 +152,8 @@ const ProductListing = () => {
             
             <button className="banner-nav-button banner-nav-right" onClick={handleBannerNext} aria-label="Next banner">
               ›
-            </button>
+              </button>
             
-            {/* Banner indicators */}
             <div className="banner-indicators">
               {promotionalBanners.map((_, index) => (
                 <button

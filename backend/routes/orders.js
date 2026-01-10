@@ -4,12 +4,10 @@ const db = require('../config/db');
 
 const DEFAULT_USER_ID = 1;
 
-// Generate unique order number
 function generateOrderNumber() {
   return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
 }
 
-// Get all orders for default user
 router.get('/', (req, res) => {
   const query = `
     SELECT o.*
@@ -24,7 +22,6 @@ router.get('/', (req, res) => {
       return res.status(500).json({ error: 'Failed to fetch orders' });
     }
     
-    // Fetch items for each order
     if (orders.length === 0) {
       return res.json([]);
     }
@@ -44,7 +41,6 @@ router.get('/', (req, res) => {
         return res.status(500).json({ error: 'Failed to fetch order items' });
       }
 
-      // Group items by order_id
       const itemsByOrder = {};
       items.forEach(item => {
         if (!itemsByOrder[item.order_id]) {
@@ -60,7 +56,6 @@ router.get('/', (req, res) => {
         });
       });
 
-      // Attach items to orders
       const ordersWithItems = orders.map(order => ({
         ...order,
         items: itemsByOrder[order.id] || []
@@ -71,7 +66,6 @@ router.get('/', (req, res) => {
   });
 });
 
-// Get single order by ID
 router.get('/:id', (req, res) => {
   const orderId = req.params.id;
   
@@ -108,7 +102,6 @@ router.get('/:id', (req, res) => {
   });
 });
 
-// Create new order
 router.post('/', (req, res) => {
   const { shipping_address, cart_items } = req.body;
 
@@ -116,17 +109,14 @@ router.post('/', (req, res) => {
     return res.status(400).json({ error: 'Shipping address and cart items are required' });
   }
 
-  // Start transaction
   db.beginTransaction((err) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to start transaction' });
     }
 
-    // Calculate total amount
     let totalAmount = 0;
     const orderItems = [];
 
-    // Get product prices and validate stock
     const productIds = cart_items.map(item => item.product_id);
     const productQuery = 'SELECT id, price, stock FROM products WHERE id IN (?)';
     
@@ -141,7 +131,6 @@ router.post('/', (req, res) => {
         productMap[p.id] = p;
       });
 
-      // Validate and calculate total
       for (const item of cart_items) {
         const product = productMap[item.product_id];
         if (!product) {
@@ -160,7 +149,6 @@ router.post('/', (req, res) => {
         });
       }
 
-      // Create order
       const orderNumber = generateOrderNumber();
       const orderQuery = `
         INSERT INTO orders (user_id, order_number, total_amount, shipping_address, status)
@@ -175,7 +163,6 @@ router.post('/', (req, res) => {
 
         const orderId = orderResult.insertId;
 
-        // Insert order items
         const itemsQuery = 'INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ?';
         const itemsValues = orderItems.map(item => [orderId, item.product_id, item.quantity, item.price]);
 
@@ -185,7 +172,6 @@ router.post('/', (req, res) => {
             return res.status(500).json({ error: 'Failed to create order items' });
           }
 
-          // Update product stock
           const updatePromises = orderItems.map(item => {
             return new Promise((resolve, reject) => {
               const updateQuery = 'UPDATE products SET stock = stock - ? WHERE id = ?';
@@ -198,15 +184,12 @@ router.post('/', (req, res) => {
 
           Promise.all(updatePromises)
             .then(() => {
-              // Clear cart
               const clearCartQuery = 'DELETE FROM cart WHERE user_id = ?';
               db.query(clearCartQuery, [DEFAULT_USER_ID], (err) => {
                 if (err) {
                   console.error('Error clearing cart:', err);
-                  // Don't fail the order if cart clearing fails
                 }
 
-                // Commit transaction
                 db.commit((err) => {
                   if (err) {
                     db.rollback();

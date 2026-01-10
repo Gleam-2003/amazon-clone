@@ -28,7 +28,6 @@ const Header = () => {
     fetchCartCount();
     fetchCategories();
     
-    // Load saved location from localStorage
     const savedLocation = localStorage.getItem('deliveryLocation');
     if (savedLocation) {
       try {
@@ -38,7 +37,6 @@ const Header = () => {
       }
     }
     
-    // Listen for cart updates
     const handleCartUpdate = () => {
       fetchCartCount();
     };
@@ -90,7 +88,6 @@ const Header = () => {
       async (position) => {
         const { latitude, longitude } = position.coords;
         try {
-          // Reverse geocoding using a free API (Nominatim)
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
             {
@@ -189,10 +186,8 @@ const Header = () => {
 
   return (
     <header className="header">
-      {/* Top Header Section */}
       <div className="header-top">
         <div className="header-top-container">
-          {/* Left: Logo and Location */}
           <div className="header-left">
             <Link to="/" className="header-logo">
               <img 
@@ -216,7 +211,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Middle: Search Bar */}
           <form className="header-search" onSubmit={handleSearch}>
             <select className="search-dropdown">
               <option>All</option>
@@ -236,7 +230,6 @@ const Header = () => {
             </button>
           </form>
 
-          {/* Right: Language, Orders, Cart */}
           <div className="header-right">
             <div className="header-language">
               <span className="flag-icon">🇮🇳</span>
@@ -255,7 +248,6 @@ const Header = () => {
                   fill="white"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  {/* Shopping Cart Handle */}
                   <path 
                     d="M12 8L10 0H2C0.9 0 0 0.9 0 2C0 3.1 0.9 4 2 4H9C9.6 4 10 4.4 10 5L11 8" 
                     stroke="white" 
@@ -264,7 +256,6 @@ const Header = () => {
                     strokeLinejoin="round"
                     fill="none"
                   />
-                  {/* Shopping Cart Basket */}
                   <path 
                     d="M2 8H12L15 24H44L47 8H15" 
                     stroke="white" 
@@ -273,7 +264,6 @@ const Header = () => {
                     strokeLinejoin="round"
                     fill="none"
                   />
-                  {/* Basket Bottom */}
                   <path 
                     d="M15 24H44L45 20H14" 
                     stroke="white" 
@@ -282,14 +272,12 @@ const Header = () => {
                     strokeLinejoin="round"
                     fill="none"
                   />
-                  {/* Left Wheel */}
                   <circle 
                     cx="16" 
                     cy="28" 
                     r="3" 
                     fill="white"
                   />
-                  {/* Right Wheel */}
                   <circle 
                     cx="42" 
                     cy="28" 
@@ -305,7 +293,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Bottom Navigation Bar */}
       <div className="header-nav">
         <div className="nav-container">
           <div 
@@ -352,7 +339,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Location Modal */}
       {showLocationModal && (
         <div className="location-modal-overlay" onClick={() => setShowLocationModal(false)}>
           <div className="location-modal" onClick={(e) => e.stopPropagation()}>

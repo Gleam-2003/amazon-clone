@@ -168,7 +168,6 @@ const Returns = () => {
           <Link to="/orders" className="view-orders-link">View Orders</Link>
         </div>
 
-        {/* Return Details Modal */}
         {showReturnDetails && selectedReturn && (
           <div className="return-form-modal">
             <div className="return-form-overlay" onClick={() => setShowReturnDetails(false)}></div>
@@ -246,7 +245,6 @@ const Returns = () => {
           </div>
         )}
 
-        {/* New Return Form Modal */}
         {showReturnForm && selectedOrder && selectedItem && (
           <div className="return-form-modal" style={{ display: 'flex' }}>
             <div className="return-form-overlay" onClick={() => setShowReturnForm(false)}></div>
@@ -335,21 +333,17 @@ const Returns = () => {
 
         {error && <div className="error-message">{error}</div>}
 
-        {/* Get eligible items (items that don't have pending returns) */}
         {(() => {
-          // Get order items that already have pending return requests
           const itemsWithPendingReturns = new Set(
             returns
               .filter(r => r.return_status === 'pending')
               .map(r => r.order_item_id)
           );
 
-          // Get all eligible items from orders (filter out items with pending returns)
           const eligibleItems = orders.flatMap((order) => {
             if (!order.items || order.items.length === 0) return [];
             return order.items
               .filter(item => {
-                // Only include items that have an id and don't have a pending return
                 if (!item.id) {
                   console.warn('Item missing id:', item);
                   return false;
@@ -363,7 +357,6 @@ const Returns = () => {
 
           return (
             <>
-              {/* Show existing return requests if any */}
               {returns.length > 0 && (
                 <div className="returns-list" style={{ marginBottom: '30px' }}>
                   <h3 style={{ marginBottom: '15px', color: '#131921', fontSize: '18px', fontWeight: '500' }}>
@@ -427,7 +420,6 @@ const Returns = () => {
                 </div>
               )}
 
-              {/* Show eligible items for return */}
               {eligibleItems.length > 0 && (
                 <div className="available-returns" style={{ background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
                   <h3 style={{ marginBottom: '20px', color: '#131921', fontSize: '18px', fontWeight: '500' }}>
@@ -435,7 +427,6 @@ const Returns = () => {
                   </h3>
                   <div className="eligible-orders">
                     {eligibleItems.map((item, index) => {
-                      // Find the order for this item
                       const order = orders.find(o => o.id === item.order_id);
                       
                       return (
@@ -478,7 +469,6 @@ const Returns = () => {
                 </div>
               )}
 
-              {/* Show message if no returns and no eligible items */}
               {returns.length === 0 && eligibleItems.length === 0 && (
                 <div className="no-returns">
                   <div className="no-returns-icon">📦</div>

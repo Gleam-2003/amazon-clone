@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-// Get all categories
 router.get('/', (req, res) => {
   const query = 'SELECT * FROM categories ORDER BY name';
   

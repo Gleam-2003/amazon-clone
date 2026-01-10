@@ -33,3 +33,6 @@ console.log('  1. Backend: cd backend && npm start');
 console.log('  2. Frontend: cd frontend && npm start');
 console.log('\nOr run both servers in separate terminals.\n');
 
+
+
+

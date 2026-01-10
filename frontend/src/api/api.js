@@ -9,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// Products API
 export const getProducts = (search = '', category = '') => {
   const params = {};
   if (search) params.search = search;
@@ -21,12 +20,10 @@ export const getProductById = (id) => {
   return api.get(`/products/${id}`);
 };
 
-// Categories API
 export const getCategories = () => {
   return api.get('/categories');
 };
 
-// Cart API
 export const getCart = () => {
   return api.get('/cart');
 };
@@ -43,7 +40,6 @@ export const removeFromCart = (cartId) => {
   return api.delete(`/cart/${cartId}`);
 };
 
-// Orders API
 export const getOrders = () => {
   return api.get('/orders');
 };
@@ -59,7 +55,6 @@ export const getOrderById = (orderId) => {
   return api.get(`/orders/${orderId}`);
 };
 
-// Returns API
 export const getReturns = () => {
   return api.get('/returns');
 };

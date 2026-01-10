@@ -16,3 +16,6 @@ echo Database setup complete!
 echo You should now see 60 products in the database.
 pause
 
+
+
+

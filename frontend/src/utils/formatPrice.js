@@ -7,10 +7,6 @@ export function toNumber(value) {
   return 0;
 }
 
-/**
- * Formats a number-like value into an INR amount string (without the ₹ symbol),
- * e.g. "12,345.67"
- */
 export function formatINRAmount(value) {
   const n = toNumber(value);
   try {
@@ -22,5 +18,4 @@ export function formatINRAmount(value) {
     return n.toFixed(2);
   }
 }
-
 

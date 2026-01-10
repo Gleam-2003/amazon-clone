@@ -31,3 +31,6 @@ echo You should now have 60 products in the database.
 echo.
 pause
 
+
+
+

@@ -4,7 +4,6 @@ const db = require('../config/db');
 
 const DEFAULT_USER_ID = 1;
 
-// Get cart items for default user
 router.get('/', (req, res) => {
   const query = `
     SELECT c.*, p.name, p.price, p.image_urls, p.stock
@@ -22,7 +21,6 @@ router.get('/', (req, res) => {
   });
 });
 
-// Add item to cart
 router.post('/', (req, res) => {
   const { product_id, quantity } = req.body;
 
@@ -30,7 +28,6 @@ router.post('/', (req, res) => {
     return res.status(400).json({ error: 'Product ID and quantity are required' });
   }
 
-  // Check if item already exists in cart
   const checkQuery = 'SELECT * FROM cart WHERE user_id = ? AND product_id = ?';
   
   db.query(checkQuery, [DEFAULT_USER_ID, product_id], (err, results) => {
@@ -40,7 +37,6 @@ router.post('/', (req, res) => {
     }
 
     if (results.length > 0) {
-      // Update quantity
       const updateQuery = 'UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?';
       db.query(updateQuery, [quantity, DEFAULT_USER_ID, product_id], (err) => {
         if (err) {
@@ -50,7 +46,6 @@ router.post('/', (req, res) => {
         res.json({ message: 'Cart updated successfully' });
       });
     } else {
-      // Insert new item
       const insertQuery = 'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)';
       db.query(insertQuery, [DEFAULT_USER_ID, product_id, quantity], (err) => {
         if (err) {
@@ -63,7 +58,6 @@ router.post('/', (req, res) => {
   });
 });
 
-// Update cart item quantity
 router.put('/:id', (req, res) => {
   const cartId = req.params.id;
   const { quantity } = req.body;
@@ -88,7 +82,6 @@ router.put('/:id', (req, res) => {
   });
 });
 
-// Remove item from cart
 router.delete('/:id', (req, res) => {
   const cartId = req.params.id;
   const query = 'DELETE FROM cart WHERE id = ? AND user_id = ?';
@@ -107,7 +100,6 @@ router.delete('/:id', (req, res) => {
   });
 });
 
-// Clear entire cart
 router.delete('/', (req, res) => {
   const query = 'DELETE FROM cart WHERE user_id = ?';
 
