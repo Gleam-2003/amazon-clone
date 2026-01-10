@@ -22,7 +22,6 @@ echo "Frontend will run on http://localhost:3000"
 echo ""
 echo "Press Ctrl+C to stop both servers"
 
-# Wait for user interrupt
 trap "kill $BACKEND_PID $FRONTEND_PID; exit" INT
 wait
 

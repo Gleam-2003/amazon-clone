@@ -31,7 +31,6 @@ A full-stack e-commerce web application that replicates Amazon's design and user
 ```bash
 mysql -u root -p < backend/database/schema.sql
 mysql -u root -p < backend/database/seed_products.sql
-mysql -u root -p < backend/database/seed_addresses.sql
 ```
 
 ### Backend Setup
@@ -77,8 +76,6 @@ Amazon Clone/
 │   │   │   └── add_unique_product_name.sql
 │   │   ├── schema.sql
 │   │   ├── seed_products.sql
-│   │   ├── seed_addresses.sql
-│   │   ├── update_images.sql
 │   │   └── README.md
 │   ├── routes/
 │   │   ├── products.js
@@ -87,6 +84,7 @@ Amazon Clone/
 │   │   ├── orders.js
 │   │   └── returns.js
 │   ├── package.json
+│   ├── package-lock.json
 │   ├── railway.json
 │   └── server.js
 │
@@ -128,6 +126,7 @@ Amazon Clone/
 │   │   ├── index.js
 │   │   └── index.css
 │   ├── package.json
+│   ├── package-lock.json
 │   ├── railway.json
 │   └── nixpacks.toml
 │

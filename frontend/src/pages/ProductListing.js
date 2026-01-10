@@ -50,7 +50,6 @@ const ProductListing = () => {
     if (categories.length > 0 || !selectedCategory) {
       fetchProducts();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory, searchQuery, categories.length]);
 
   const clearFilters = () => {
@@ -106,7 +105,6 @@ const ProductListing = () => {
     } else {
       setBannerIndex(0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory, searchQuery]);
 
   const currentBanner = promotionalBanners[bannerIndex];

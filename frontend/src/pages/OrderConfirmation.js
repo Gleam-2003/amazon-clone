@@ -23,7 +23,6 @@ const OrderConfirmation = () => {
 
   useEffect(() => {
     fetchOrder();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderId]);
 
   if (loading) {
