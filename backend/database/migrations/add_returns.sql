@@ -1,10 +1,5 @@
--- Migration: Add Returns Table
--- Creates the returns table if it does not exist
--- Safe to re-run (uses IF NOT EXISTS)
-
 USE amazon_clone;
 
--- Create Returns Table
 CREATE TABLE IF NOT EXISTS returns (
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT NOT NULL,
@@ -21,10 +16,4 @@ CREATE TABLE IF NOT EXISTS returns (
     INDEX idx_order (order_id),
     INDEX idx_status (return_status)
 );
-
--- Verification (optional)
-SELECT COUNT(*) AS returns_table_exists 
-FROM information_schema.tables 
-WHERE table_schema = 'amazon_clone' 
-  AND table_name = 'returns';
 

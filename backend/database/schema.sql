@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS amazon_clone;
 USE amazon_clone;
 
--- Addresses Table
 CREATE TABLE IF NOT EXISTS addresses (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL DEFAULT 1,
@@ -19,7 +18,6 @@ CREATE TABLE IF NOT EXISTS addresses (
     INDEX idx_pincode (pincode)
 );
 
--- Categories Table
 CREATE TABLE IF NOT EXISTS categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -27,10 +25,9 @@ CREATE TABLE IF NOT EXISTS categories (
     INDEX idx_name (name)
 );
 
--- Products Table
 CREATE TABLE IF NOT EXISTS products (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     stock INT DEFAULT 0,
@@ -45,7 +42,6 @@ CREATE TABLE IF NOT EXISTS products (
     INDEX idx_price (price)
 );
 
--- Cart Table
 CREATE TABLE IF NOT EXISTS cart (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL DEFAULT 1,
@@ -58,7 +54,6 @@ CREATE TABLE IF NOT EXISTS cart (
     INDEX idx_user (user_id)
 );
 
--- Orders Table
 CREATE TABLE IF NOT EXISTS orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL DEFAULT 1,
@@ -74,7 +69,6 @@ CREATE TABLE IF NOT EXISTS orders (
     INDEX idx_created_at (created_at)
 );
 
--- Order Items Table
 CREATE TABLE IF NOT EXISTS order_items (
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT NOT NULL,
@@ -88,7 +82,6 @@ CREATE TABLE IF NOT EXISTS order_items (
     INDEX idx_product (product_id)
 );
 
--- Returns Table
 CREATE TABLE IF NOT EXISTS returns (
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT NOT NULL,
