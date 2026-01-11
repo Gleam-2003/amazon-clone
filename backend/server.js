@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const db = require("./config/db");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 // CORS configuration - MUST be before routes
 const allowedOrigins = [
