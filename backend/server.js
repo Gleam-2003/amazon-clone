@@ -8,12 +8,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // CORS configuration - MUST be before routes
+const allowedOrigins = [
+  process.env.FRONTEND_URL_VERCEL,
+  process.env.FRONTEND_URL_RAILWAY,
+  "http://localhost:3000"
+].filter(Boolean); // Remove undefined values
+
 app.use(cors({
-  origin: [
-    "https://amazon-clone-frontend-production-3cfe.up.railway.app",
-    "https://amazon-clone-tau-nine-95.vercel.app",
-    "http://localhost:3000"
-  ],
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
