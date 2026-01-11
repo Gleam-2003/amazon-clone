@@ -1,11 +1,12 @@
 const mysql = require("mysql2/promise");
 
+// Support both Railway (MYSQL*) and local development (DB_*) environment variables
 const db = mysql.createPool({
-  host: process.env.MYSQLHOST,        // ✅ Railway internal host
-  user: process.env.MYSQLUSER,        // ✅ root
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT || 3306,
+  host: process.env.MYSQLHOST || process.env.DB_HOST || 'localhost',
+  user: process.env.MYSQLUSER || process.env.DB_USER || 'root',
+  password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD || '',
+  database: process.env.MYSQLDATABASE || process.env.DB_NAME || 'amazon_clone',
+  port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
   waitForConnections: true,
   connectionLimit: 10,
 });
