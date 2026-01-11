@@ -7,9 +7,21 @@ const db = require("./config/db");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// CORS configuration - MUST be before routes
 app.use(cors({
-  origin: '*',
+  origin: [
+    "https://amazon-clone-frontend-production-3cfe.up.railway.app",
+    "https://amazon-clone-tau-nine-95.vercel.app",
+    "http://localhost:3000"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
+
+// Explicitly allow OPTIONS
+app.options("*", cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
