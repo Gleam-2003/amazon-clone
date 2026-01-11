@@ -17,6 +17,21 @@ app.get("/", (req, res) => {
   res.send("Backend running");
 });
 
+app.get('/api', (req, res) => {
+  res.json({ 
+    message: 'Amazon Clone API', 
+    version: '1.0.0',
+    endpoints: {
+      products: '/api/products',
+      cart: '/api/cart',
+      orders: '/api/orders',
+      returns: '/api/returns',
+      categories: '/api/categories',
+      health: '/api/health'
+    }
+  });
+});
+
 app.use('/api/products', require('./routes/products'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
