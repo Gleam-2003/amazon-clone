@@ -2,16 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-router.get('/', (req, res) => {
-  const query = 'SELECT * FROM categories ORDER BY name';
-  
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error fetching categories:', err);
-      return res.status(500).json({ error: 'Failed to fetch categories' });
-    }
+router.get('/', async (req, res) => {
+  try {
+    const query = 'SELECT * FROM categories ORDER BY name';
+    const [results] = await db.query(query);
     res.json(results);
-  });
+  } catch (err) {
+    console.error('Error fetching categories:', err);
+    res.status(500).json({ error: 'Failed to fetch categories' });
+  }
 });
 
 module.exports = router;
