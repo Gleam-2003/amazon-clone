@@ -17,6 +17,10 @@ app.get("/", (req, res) => {
   res.send("Backend running");
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.get('/api', (req, res) => {
   res.json({ 
     message: 'Amazon Clone API', 
@@ -27,7 +31,7 @@ app.get('/api', (req, res) => {
       orders: '/api/orders',
       returns: '/api/returns',
       categories: '/api/categories',
-      health: '/api/health'
+      health: '/health'
     }
   });
 });
@@ -39,7 +43,7 @@ app.use('/api/returns', require('./routes/returns'));
 app.use('/api/categories', require('./routes/categories'));
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Server is running' });
+  res.status(200).send("OK");
 });
 
 app.listen(PORT, () => {
